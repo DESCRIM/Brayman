@@ -57,3 +57,21 @@ var els=document.querySelectorAll('h1,.lead,.row,.mq,h2,.sub,.pills,.card,.feat 
 var io=new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;var el=en.target;io.unobserve(el);el.classList.add('in');setTimeout(function(){el.classList.remove('rv','in');el.style.transitionDelay=''},1400)})},{threshold:.1,rootMargin:'0px 0px -5% 0px'});
 els.forEach(function(el){el.classList.add('rv');el.style.transitionDelay=Math.min([].indexOf.call(el.parentNode.children,el),4)*90+'ms';io.observe(el)});
 })();
+
+/* Карусель фото в карточках */
+(function(){
+var calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+document.querySelectorAll('.card').forEach(function(c){
+var sl=c.querySelector('.sl'),im=sl.children,n=im.length,dots=c.querySelector('.dots'),vn=c.querySelector('.vn'),ord=c.querySelector('.ord'),cur=0,i;
+for(i=0;i<n;i++){(function(k){var b=document.createElement('button');b.setAttribute('aria-label','Фото '+(k+1));b.onclick=function(){go(k)};dots.appendChild(b)})(i)}
+function go(k){sl.scrollTo({left:k*sl.clientWidth,behavior:calm?'auto':'smooth'})}
+function upd(){for(var j=0;j<n;j++)dots.children[j].setAttribute('aria-current',j===cur);
+var v=im[cur].dataset.v;vn.textContent=v;
+ord.href='https://t.me/danlekzzz?text='+encodeURIComponent('Привет! Хочу заказать '+c.dataset.n+' ('+v+')')}
+c.querySelector('.ar.l').onclick=function(){go((cur-1+n)%n)};
+c.querySelector('.ar.r').onclick=function(){go((cur+1)%n)};
+sl.addEventListener('scroll',function(){var k=Math.round(sl.scrollLeft/sl.clientWidth);if(k!==cur&&k>=0&&k<n){cur=k;upd()}},{passive:true});
+sl.addEventListener('keydown',function(e){if(e.key==='ArrowLeft'){e.preventDefault();go((cur-1+n)%n)}if(e.key==='ArrowRight'){e.preventDefault();go((cur+1)%n)}});
+upd();
+});
+})();

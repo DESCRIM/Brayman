@@ -73,3 +73,18 @@ footer{padding:60px 0 44px;text-align:center;color:var(--mut);font-size:14px}
 .gr{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 #gm{color:var(--mut);flex:1;min-width:200px}
 @media(max-width:760px){.kit{grid-template-columns:1fr}nav a:not(:last-child){display:none}}
+
+/* Карусель фото */
+.im{position:relative}
+.sl{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;outline-offset:-3px}
+.sl::-webkit-scrollbar{display:none}
+.sl img{flex:0 0 100%;min-width:100%;scroll-snap-align:center;scroll-snap-stop:always}
+.card:hover .im img{transform:none}
+.ar{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(13,9,10,.55);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;font:400 26px/1 Manrope,sans-serif;padding:0 0 3px;cursor:pointer;transition:background .3s,transform .35s var(--e)}
+.ar.l{left:12px}.ar.r{right:12px}
+.ar:hover{background:var(--r2);transform:translateY(-50%) scale(1.1)}
+.ar:active{transform:translateY(-50%) scale(.94)}
+.dots{position:absolute;left:0;right:0;bottom:12px;z-index:2;display:flex;justify-content:center;gap:7px}
+.dots button{width:8px;height:8px;border-radius:8px;border:0;padding:0;background:rgba(0,0,0,.28);cursor:pointer;transition:width .4s var(--e),background .3s}
+.dots button[aria-current=true]{width:22px;background:var(--r2)}
+.vn{color:#fff}
