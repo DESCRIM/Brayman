@@ -2,10 +2,11 @@
 (function(){
 var pills=document.querySelectorAll('.pill'),cards=document.querySelectorAll('.card');
 pills.forEach(function(b){b.onclick=function(){pills.forEach(function(x){x.setAttribute('aria-pressed',x===b)});cards.forEach(function(c){c.hidden=b.dataset.f!=='all'&&c.dataset.c!==b.dataset.f})}});
-var ch=document.querySelectorAll('.opt input'),go=document.getElementById('go');
-function upd(){var v=[].filter.call(ch,function(i){return i.checked}).map(function(i){return i.value});
+var ch=document.querySelectorAll('.vp input'),go=document.getElementById('go');
+function upd(){ch.forEach(function(i){i.parentNode.classList.toggle('on',i.checked)});
+var s=[].filter.call(ch,function(i){return i.checked}),v=s.map(function(i){return i.value}),l=s.map(function(i){return i.dataset.l});
 document.getElementById('cnt').textContent=v.length+' шт.';
-document.getElementById('sum').textContent=v.length?v.join(', '):'Выберите хотя бы одну вещь';
+document.getElementById('sum').textContent=v.length?l.join('\n'):'Выберите хотя бы одну вещь';
 go.href='https://t.me/danlekzzz'+(v.length?'?text='+encodeURIComponent('Привет! Хочу заказать: '+v.join(', ')):'')}
 ch.forEach(function(i){i.onchange=upd});
 })();
